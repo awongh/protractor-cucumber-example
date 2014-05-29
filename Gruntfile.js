@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jshint:test', 'protractor', 'karma']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -365,6 +365,24 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
+    protractor: {
+      options: {
+        configFile: "protractor.conf.js", // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      run: {}
+      //your_target: {
+      //  options: {
+      //    configFile: "e2e.conf.js", // Target-specific config file
+      //    args: {} // Target-specific arguments
+      //  }
+      //},
+    },
+
     // Test settings
     karma: {
       unit: {
@@ -373,7 +391,6 @@ module.exports = function (grunt) {
       }
     }
   });
-
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
@@ -400,6 +417,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
+    'protractor:run',
     'karma'
   ]);
 
