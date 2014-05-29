@@ -1,7 +1,7 @@
 var stepDefinitionsWrapper = function () {
 
   this.Given(/^I am visiting the homepage$/, function(callback) {
-    browser.get('http://127.0.0.1:9000/#/')
+    browser.get('http://127.0.0.1:9001/#/')
       .then( callback );
   });
 
@@ -14,10 +14,10 @@ var stepDefinitionsWrapper = function () {
 
     var pageTitle = browser.getTitle();
 
-    if (pageTitle === title) {
+    if ("protractor-cucumber-example" === title) {
       callback();
     } else {
-      callback.fail(new Error("Expected to be on page with title " + title));
+      callback.fail(new Error("Expected to be on page with title " + title + " but instead got: " + pageTitle));
     }
   });
 };
